@@ -11,15 +11,25 @@
       </div>
       <div class="menu__block">
         <ul class="menu">
-          <li><a href="/main" class="menu__item">Main</a></li>
-          <li><a href="/order" class="menu__item">Order</a></li>
+          <li><a href="/main" class="menu__item menu__item-hover">Main</a></li>
+          <li>
+            <a href="/order" class="menu__item menu__item-hover">Order</a>
+          </li>
         </ul>
         <div class="vertical__line"></div>
         <div class="login__block">
           <div class="avatar">
             <fa class="avatar__icon" icon="fa-solid fa-user" />
           </div>
-          <a href="/login" class="menu__item">Log In</a>
+          <a
+            href="/login"
+            class="menu__item menu__item-hover"
+            v-if="this.$store.state.logged === false"
+            >Log In</a
+          >
+          <div class="menu__item" v-else>
+            {{ this.$store.state.firstName + " " + this.$store.state.lastName }}
+          </div>
         </div>
       </div>
     </nav>
@@ -70,7 +80,7 @@
         transition: 0.3s all ease;
         border: 2px solid transparent;
       }
-      &__item:hover {
+      &__item-hover:hover {
         color: #5255c8;
         border-bottom: 2px solid #5255c8;
       }

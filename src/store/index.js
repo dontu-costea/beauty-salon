@@ -4,6 +4,8 @@ export default createStore({
   state: () => ({
     defaultEmail: "root@domain.com",
     defaultPassword: "12345678",
+    firstName: "Dontu",
+    lastName: "Constantin",
     logged: false
   }),
   getters: {
