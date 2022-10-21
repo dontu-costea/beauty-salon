@@ -9,6 +9,9 @@ export default createStore({
   getters: {
   },
   mutations: {
+    loggedStatus(state, payload) {
+      state.logged = payload
+    }
   },
   actions: {
   },
