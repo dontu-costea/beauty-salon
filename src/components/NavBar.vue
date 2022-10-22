@@ -50,7 +50,7 @@
             v-if="this.$store.state.logged === false"
             @click="this.$router.push({ name: 'login' })"
             type="submit"
-            class="menu__item menu__item-hover no-padding-right"
+            class="menu__item menu__item-hover"
           >
             Log In
           </button>
