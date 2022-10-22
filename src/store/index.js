@@ -11,8 +11,8 @@ export default createStore({
   getters: {
   },
   mutations: {
-    loggedStatus(state, payload) {
-      state.logged = payload
+    loggedStatus(state) {
+      state.logged = !state.logged
     }
   },
   actions: {

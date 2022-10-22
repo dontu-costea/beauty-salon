@@ -8,8 +8,8 @@ export default {
   data: () => ({
     email: "",
     password: "",
-    passwordBorderColor: "#3b3d43",
-    emailBorderColor: "#3b3d43",
+    passwordBorderColor: "#A3A3A3",
+    emailBorderColor: "#A3A3A3",
   }),
   methods: {
     formValidation() {
@@ -35,7 +35,7 @@ export default {
       }
     },
     loggedStatus() {
-      this.$store.commit("loggedStatus", true);
+      this.$store.commit("loggedStatus");
     },
   },
 };
@@ -81,7 +81,7 @@ export default {
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
-  color: #b7b9c2;
+  color: #2c2c2c;
   transition: 0.2s all ease;
 }
 .wrapper {
@@ -92,7 +92,7 @@ export default {
   height: 100vh;
   position: relative;
   .login__block {
-    background: #504e5c;
+    background: #d0d0d0;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -110,12 +110,12 @@ export default {
         left: 15px;
         top: 20px;
         font-size: 21px;
-        color: #fbe59a;
+        color: #5255c8;
       }
       input {
         font-size: 18px;
         border-radius: 4px;
-        background: #3b3d43;
+        background: #a3a3a3;
         margin: 7px 0px;
         padding: 12px 12px 12px 45px;
         outline: none;
@@ -128,10 +128,10 @@ export default {
 .submit {
   font-size: 14px;
   font-weight: bold;
-  color: #1a1c22;
-  background: #fbe59a;
+  color: #f3f3f3;
+  background: #5255c8;
   padding: 12px 30px;
-  border: 1px solid #fbe59a;
+  border: 1px solid #5255c8;
   border-radius: 5px;
   cursor: pointer;
   margin: 25px 0px;
@@ -152,7 +152,7 @@ export default {
   backface-visibility: hidden;
 }
 .forgot-pass:hover {
-  color: #fbe59a;
+  color: #5255c8;
 }
 .form__title {
   font-size: 26px;

@@ -3,17 +3,42 @@
   <div class="container">
     <nav class="nav-bar">
       <div class="logo__block">
-        <a href="/" class="logo"><img src="@/img/logo.png" alt="" /></a>
+        <img
+          src="@/img/logo.png"
+          alt=""
+          class="logo"
+          @click="this.$router.push({ name: 'publicPage' })"
+        />
         <div class="logo__title">
-          <a href="/" class="link">PowerBeauty</a>
+          <button
+            type="submit"
+            class="link"
+            @click="this.$router.push({ name: 'publicPage' })"
+          >
+            PowerBeauty
+          </button>
           Beauty is our duty
         </div>
       </div>
       <div class="menu__block">
         <ul class="menu">
-          <li><a href="/main" class="menu__item menu__item-hover">Main</a></li>
           <li>
-            <a href="/order" class="menu__item menu__item-hover">Order</a>
+            <button
+              @click="this.$router.push({ name: 'main' })"
+              type="submit"
+              class="menu__item menu__item-hover"
+            >
+              Main
+            </button>
+          </li>
+          <li>
+            <button
+              @click="this.$router.push({ name: 'order' })"
+              type="submit"
+              class="menu__item menu__item-hover"
+            >
+              Order
+            </button>
           </li>
         </ul>
         <div class="vertical__line"></div>
@@ -21,14 +46,21 @@
           <div class="avatar">
             <fa class="avatar__icon" icon="fa-solid fa-user" />
           </div>
-          <a
-            href="/login"
-            class="menu__item menu__item-hover"
+          <button
             v-if="this.$store.state.logged === false"
-            >Log In</a
+            @click="this.$router.push({ name: 'login' })"
+            type="submit"
+            class="menu__item menu__item-hover no-padding-right"
           >
-          <div class="menu__item" v-else>
-            {{ this.$store.state.firstName + " " + this.$store.state.lastName }}
+            Log In
+          </button>
+          <div class="menu__item no-padding-right" v-else>
+            <div class="username menu__item-hover">
+              {{
+                this.$store.state.firstName + " " + this.$store.state.lastName
+              }}
+              <fa icon="fa-solid fa-angle-down" class="log-out__icon" />
+            </div>
           </div>
         </div>
       </div>
@@ -56,11 +88,17 @@
     color: #5255c8;
     font-size: 14px;
     line-height: 17px;
+    .logo {
+      cursor: pointer;
+    }
     .link {
       color: inherit;
       display: block;
       font-size: 34px;
       line-height: 43px;
+      cursor: pointer;
+      background: none;
+      border: none;
     }
   }
   .menu__block {
@@ -79,6 +117,12 @@
         padding: 6px 20px;
         transition: 0.3s all ease;
         border: 2px solid transparent;
+        cursor: pointer;
+        background: none;
+        .username {
+          border: 2px solid transparent;
+          transition: 0.3s all ease;
+        }
       }
       &__item-hover:hover {
         color: #5255c8;
@@ -106,6 +150,12 @@
           color: white;
         }
       }
+      .log-out__icon {
+        margin-left: 6px;
+      }
+    }
+    .no-padding-right {
+      padding-right: 0px;
     }
   }
 }
