@@ -1,4 +1,16 @@
-<script></script>
+<script>
+export default {
+  data: () => ({
+    showLogout: false,
+  }),
+  methods: {
+    logout() {
+      this.$router.push({ name: "publicPage" });
+      this.$store.commit("loggedStatus");
+    },
+  },
+};
+</script>
 <template>
   <div class="container">
     <nav class="nav-bar">
@@ -55,12 +67,26 @@
             Log In
           </button>
           <div class="menu__item no-padding-right" v-else>
-            <div class="username menu__item-hover">
+            <div
+              class="username menu__item-hover"
+              @click="this.showLogout = !this.showLogout"
+            >
               {{
                 this.$store.state.firstName + " " + this.$store.state.lastName
               }}
-              <fa icon="fa-solid fa-angle-down" class="log-out__icon" />
+              <fa
+                icon="fa-solid fa-angle-down"
+                class="log-out__icon"
+                :class="{ rotate: showLogout }"
+              />
             </div>
+            <transition name="logout">
+              <div class="logout__block" v-if="showLogout">
+                <button @click="logout" type="submit" class="logout">
+                  Log Out
+                </button>
+              </div>
+            </transition>
           </div>
         </div>
       </div>
@@ -76,9 +102,10 @@
   top: 0;
   width: 100%;
   z-index: 10;
+  background-color: white;
 }
 .nav-bar {
-  margin-top: 22px;
+  margin: 22px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -123,6 +150,27 @@
           border: 2px solid transparent;
           transition: 0.3s all ease;
         }
+        .logout__block {
+          position: relative;
+          width: 100%;
+          .logout {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            border: 2px solid transparent;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s all ease;
+            color: rgba(0, 0, 0, 0.6);
+            font-weight: bold;
+          }
+          .logout:hover {
+            border-bottom: 2px solid #5255c8;
+            color: #5255c8;
+          }
+        }
       }
       &__item-hover:hover {
         color: #5255c8;
@@ -152,11 +200,24 @@
       }
       .log-out__icon {
         margin-left: 6px;
+        transition: 0.5s all ease;
       }
     }
     .no-padding-right {
       padding-right: 0px;
     }
   }
+}
+.rotate {
+  transform: rotate(-180deg);
+}
+.logout-enter-active,
+.logout-leave-active {
+  transition: 0.5s all ease;
+}
+.logout-enter-from,
+.logout-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
 }
 </style>
