@@ -3,6 +3,8 @@ import PublicPage from '../components/PublicPage.vue'
 import Login from '../components/Login.vue'
 import MainPage from '../components/MainPage.vue'
 import Order from '../components/Order.vue'
+import Step2 from '../components/Step2.vue'
+import Step3 from '../components/Step3.vue'
 import Store from '../store/index.js'
 
 const routes = [
@@ -22,9 +24,19 @@ const routes = [
     component: MainPage
   },
   {
-    path: '/order',
+    path: '/order/',
     name: 'order',
     component: Order
+  },
+  {
+    path: '/order-2',
+    name: 'order-2',
+    component: Step2
+  },
+  {
+    path: '/order-3',
+    name: 'order-3',
+    component: Step3
   }
 ]
 

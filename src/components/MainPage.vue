@@ -12,6 +12,7 @@ export default {
   }),
 };
 </script>
+
 <template>
   <nav-bar />
   <div class="main-page__block">
@@ -25,18 +26,16 @@ export default {
         />
       </div>
       <div class="wrapper">
-        <TransitionGroup name="services" tag="ul" appear>
-          <li class="content__block" v-if="showServices">
-            <div
-              class="content__item"
-              v-for="item in this.$store.state.services"
-              @click="this.$router.push({ name: 'order' })"
-            >
-              <img :src="item.img" alt="" />
-              <div class="item__title">{{ item.name.toUpperCase() }}</div>
-            </div>
-          </li>
-        </TransitionGroup>
+        <div v-if="showServices" class="content__block">
+          <div
+            class="content__item"
+            v-for="item in this.$store.state.services"
+            @click="this.$router.push({ name: 'order' })"
+          >
+            <img :src="item.img" alt="" />
+            <div class="item__title">{{ item.name.toUpperCase() }}</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -50,18 +49,16 @@ export default {
         />
       </div>
       <div class="wrapper">
-        <TransitionGroup name="services" tag="ul">
-          <li class="content__block" v-if="showProducts">
-            <div
-              class="content__item"
-              v-for="item in this.$store.state.products"
-              @click="this.$router.push({ name: 'order' })"
-            >
-              <img :src="item.img" alt="" />
-              <div class="item__title">{{ item.name.toUpperCase() }}</div>
-            </div>
-          </li>
-        </TransitionGroup>
+        <div v-if="showProducts" class="content__block">
+          <div
+            class="content__item"
+            v-for="item in this.$store.state.products"
+            @click="this.$router.push({ name: 'order' })"
+          >
+            <img :src="item.img" alt="" />
+            <div class="item__title">{{ item.name.toUpperCase() }}</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -75,18 +72,16 @@ export default {
         />
       </div>
       <div class="wrapper">
-        <TransitionGroup name="services" tag="ul">
-          <li class="content__block" v-if="showMasters">
-            <div
-              class="content__item"
-              v-for="item in this.$store.state.masters"
-              @click="this.$router.push({ name: 'order' })"
-            >
-              <img :src="item.img" alt="" />
-              <div class="item__title">{{ item.name.toUpperCase() }}</div>
-            </div>
-          </li>
-        </TransitionGroup>
+        <div v-if="showMasters" class="content__block">
+          <div
+            class="content__item"
+            v-for="item in this.$store.state.masters"
+            @click="this.$router.push({ name: 'order' })"
+          >
+            <img :src="item.img" alt="" />
+            <div class="item__title">{{ item.name.toUpperCase() }}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -104,9 +99,6 @@ export default {
   .masters__block {
     margin-bottom: 60px;
   }
-  .wrapper {
-    overflow: hidden;
-  }
   .title__block {
     display: flex;
     justify-content: space-between;
@@ -114,6 +106,7 @@ export default {
     cursor: pointer;
     color: rgba(0, 0, 0, 0.96);
     transition: 0.3s all ease;
+    background-color: #ebe8ec;
     .title {
       font-size: 30px;
       line-height: 30px;
@@ -133,7 +126,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 103px;
-
     .content__item {
       margin: 48px 0px 0px 0px;
       cursor: pointer;
@@ -151,18 +143,5 @@ export default {
 }
 .rotate {
   transform: rotate(-180deg);
-}
-.services-move,
-.services-enter-active,
-.services-leave-active {
-  transition: all 0.6s ease;
-}
-.services-enter-from,
-.services-leave-to {
-  opacity: 0;
-  transform: translateY(-550px);
-}
-.services-leave-active {
-  position: absolute;
 }
 </style>

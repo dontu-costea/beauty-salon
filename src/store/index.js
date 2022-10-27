@@ -32,6 +32,7 @@ export default createStore({
         id: 5,
         name: 'Barber',
         img: require('@/img/services-img/barber.png'),
+
       },
       {
         id: 6,
@@ -47,6 +48,7 @@ export default createStore({
         id: 8,
         name: 'Barber',
         img: require('@/img/services-img/barber.png'),
+
       },
       {
         id: 9,
@@ -178,12 +180,19 @@ export default createStore({
         img: require('@/img/services-img/barber.png'),
       }
     ],
+    newOrder: {
+      order: {},
+      client: {}
+    }
   }),
   getters: {
   },
   mutations: {
     loggedStatus(state) {
       state.logged = !state.logged
+    },
+    sendOrder(state, payload) {
+      state.newOrder.order = payload
     }
   },
   actions: {
