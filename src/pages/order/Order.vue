@@ -1,9 +1,11 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
+import OrderList from "@/components/OrderList.vue";
 
 export default {
   components: {
     NavBar,
+    OrderList,
   },
   data: () => ({
     newOrder: {
@@ -14,16 +16,34 @@ export default {
       timeFrom: "",
       timeTo: "",
       price: 0,
+      money: "MDL",
+      orderId: 0,
     },
+    convertedPrice: 0,
   }),
   methods: {
     changeCallStatus(event) {
       if (event.target.value === "Hair woman") {
-        this.newOrder.price = 200;
+        this.convertedPrice = 200;
+        this.newOrder.price = this.convertedPrice;
       } else if (event.target.value === "Nails") {
-        this.newOrder.price = 300;
+        this.convertedPrice = 300;
+        this.newOrder.price = this.convertedPrice;
       } else if (event.target.value === "Barber") {
-        this.newOrder.price = 150;
+        this.convertedPrice = 150;
+        this.newOrder.price = this.convertedPrice;
+      }
+    },
+    checkMoney(event) {
+      if (event.target.value == "EUR") {
+        this.newOrder.price = this.convertedPrice / 19.1;
+        this.newOrder.money = "EUR";
+      } else if (event.target.value == "USD") {
+        this.newOrder.price = this.convertedPrice / 19.23;
+        this.newOrder.money = "USD";
+      } else {
+        this.newOrder.price = this.convertedPrice;
+        this.newOrder.money = "MDL";
       }
     },
     formValidation() {
@@ -43,6 +63,12 @@ export default {
     },
     sendOrder() {
       this.$store.commit("sendOrder", this.newOrder);
+    },
+  },
+  computed: {
+    addOrderId() {
+      return (this.newOrder.orderId =
+        this.$store.state.orders.orders.length + 1);
     },
   },
 };
@@ -70,8 +96,8 @@ export default {
             >
               <option disabled>Select from list</option>
               <option
-                v-for="service in this.$store.state.services"
-                key:service.id
+                v-for="service in this.$store.state.services.services"
+                :key="service.id"
                 :value="service.name"
               >
                 {{ service.name }}
@@ -89,7 +115,7 @@ export default {
             <select class="select" v-model="this.newOrder.product">
               <option disabled>Select from list</option>
               <option
-                v-for="product in this.$store.state.products"
+                v-for="product in this.$store.state.products.products"
                 key:product.id
               >
                 {{ product.name }}
@@ -106,7 +132,10 @@ export default {
           <div class="input__block">
             <select class="select" v-model="this.newOrder.master">
               <option disabled>Select from list</option>
-              <option v-for="master in this.$store.state.masters" key:master.id>
+              <option
+                v-for="master in this.$store.state.masters.masters"
+                key:master.id
+              >
                 {{ master.name }}
               </option>
             </select>
@@ -129,8 +158,18 @@ export default {
             hint
           </div>
           <div class="input__block">
-            <input type="time" name="from" v-model="this.newOrder.timeFrom" />
-            <input type="time" name="to" v-model="this.newOrder.timeTo" />
+            <input
+              type="time"
+              name="from"
+              v-model="this.newOrder.timeFrom"
+              class="select time_date"
+            />
+            <input
+              type="time"
+              name="to"
+              v-model="this.newOrder.timeTo"
+              class="select time_date"
+            />
           </div>
         </div>
 
@@ -140,18 +179,33 @@ export default {
             hint
           </div>
           <div class="input__block">
-            <input type="number" v-model="this.newOrder.price" readonly />
-            <select name="price">
-              <option value="mdl">MDL</option>
-              <option value="eur">EUR</option>
-              <option value="usd">USD</option>
+            <input
+              type="number"
+              v-model="this.newOrder.price"
+              readonly
+              class="select time_date"
+            />
+            <select
+              name="price"
+              class="select time_date"
+              @change="checkMoney($event)"
+            >
+              <option disabled>Select from list</option>
+              <option value="MDL">MDL</option>
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
             </select>
           </div>
         </div>
 
-        <button type="submit" @click="formValidation">Next step</button>
+        <div class="button">
+          <button type="submit" @click="formValidation" class="form__button">
+            Next step
+          </button>
+        </div>
       </div>
     </div>
+    <order-list v-if="this.$store.state.orders.orders.length" />
   </div>
 </template>
 
@@ -187,15 +241,43 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 135px;
+    .button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 70px;
+      .form__button {
+        font-size: 24px;
+        line-height: 26px;
+        text-align: center;
+        letter-spacing: -0.03em;
+        background-color: white;
+        border: 1px solid transparent;
+        width: 360px;
+        height: 60px;
+        border-radius: 242px;
+        transition: 0.3s all ease;
+        cursor: pointer;
+      }
+      .form__button:hover {
+        border: 1px solid #5255c8;
+        color: #5255c8;
+      }
+    }
     .select__block {
       display: flex;
       align-items: center;
       margin-bottom: 69px;
+      position: relative;
+      left: 50px;
       .text__block {
         font-size: 12px;
         line-height: 20px;
         color: rgba(0, 0, 0, 0.6);
         text-align: right;
+        position: absolute;
+        top: 0;
+        left: -60px;
       }
       .text__title {
         font-size: 16px;
@@ -213,8 +295,12 @@ export default {
         background: #fafafa;
         border: 1px solid transparent;
         border-radius: 20px;
-        width: 300px;
+        width: 578px;
         padding: 12px 15px;
+      }
+      .time_date {
+        width: 218px;
+        margin-right: 16px;
       }
     }
   }

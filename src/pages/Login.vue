@@ -18,7 +18,7 @@ export default {
         this.$store.state.defaultPassword === this.password
       ) {
         this.loggedStatus();
-        this.$router.push({ name: "main" });
+        this.$router.push({ name: "home" });
         this.emailBorderColor = "#1a1c22";
         this.passwordBorderColor = "#1a1c22";
       } else {

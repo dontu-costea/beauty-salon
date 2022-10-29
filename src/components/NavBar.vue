@@ -5,7 +5,7 @@ export default {
   }),
   methods: {
     logout() {
-      this.$router.push({ name: "publicPage" });
+      this.$router.push({ name: "index" });
       this.$store.commit("loggedStatus");
     },
   },
@@ -16,16 +16,16 @@ export default {
     <nav class="nav-bar">
       <div class="logo__block">
         <img
-          src="@/img/logo.png"
+          src="@/assets/img/logo.png"
           alt=""
           class="logo"
-          @click="this.$router.push({ name: 'publicPage' })"
+          @click="this.$router.push({ name: 'index' })"
         />
         <div class="logo__title">
           <button
             type="submit"
             class="link"
-            @click="this.$router.push({ name: 'publicPage' })"
+            @click="this.$router.push({ name: 'index' })"
           >
             PowerBeauty
           </button>
@@ -36,7 +36,7 @@ export default {
         <ul class="menu">
           <li>
             <button
-              @click="this.$router.push({ name: 'main' })"
+              @click="this.$router.push({ name: 'home' })"
               type="submit"
               class="menu__item menu__item-hover"
             >

@@ -29,7 +29,7 @@ export default {
         <div v-if="showServices" class="content__block">
           <div
             class="content__item"
-            v-for="item in this.$store.state.services"
+            v-for="item in this.$store.state.services.services"
             @click="this.$router.push({ name: 'order' })"
           >
             <img :src="item.img" alt="" />
@@ -52,7 +52,7 @@ export default {
         <div v-if="showProducts" class="content__block">
           <div
             class="content__item"
-            v-for="item in this.$store.state.products"
+            v-for="item in this.$store.state.products.products"
             @click="this.$router.push({ name: 'order' })"
           >
             <img :src="item.img" alt="" />
@@ -75,7 +75,7 @@ export default {
         <div v-if="showMasters" class="content__block">
           <div
             class="content__item"
-            v-for="item in this.$store.state.masters"
+            v-for="item in this.$store.state.masters.masters"
             @click="this.$router.push({ name: 'order' })"
           >
             <img :src="item.img" alt="" />

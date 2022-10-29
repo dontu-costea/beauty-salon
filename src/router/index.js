@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PublicPage from '../components/PublicPage.vue'
-import Login from '../components/Login.vue'
-import MainPage from '../components/MainPage.vue'
-import Order from '../components/Order.vue'
-import Step2 from '../components/Step2.vue'
-import Step3 from '../components/Step3.vue'
+import Index from '../pages/Index.vue'
+import Login from '../pages/Login.vue'
+import Home from '../pages/Home.vue'
+import Order from '../pages/order/Order.vue'
+import Step2 from '../pages/order/Step2.vue'
+import Step3 from '../pages/order/Step3.vue'
 import Store from '../store/index.js'
 
 const routes = [
   {
     path: '/',
-    name: 'publicPage',
-    component: PublicPage
+    name: 'index',
+    component: Index
   },
   {
     path: '/login',
@@ -19,9 +19,9 @@ const routes = [
     component: Login
   },
   {
-    path: '/main',
-    name: 'main',
-    component: MainPage
+    path: '/home',
+    name: 'home',
+    component: Home
   },
   {
     path: '/order/',
@@ -46,7 +46,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(!Store.state.logged && (to.name === 'main' || to.name === 'order')) {alert("You need to Log In to acces this page!")}
+  if(!Store.state.logged && (to.name === 'home' || to.name === 'order' || to.name === 'order-2' || to.name === 'order-3')) {
+    alert("You need to Log In to acces this page!");
+  }
   else next();
 })
 
