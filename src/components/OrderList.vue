@@ -4,7 +4,7 @@
   <div class="orders__title">Orders</div>
   <ul>
     <li v-for="order in this.$store.state.orders.orders" class="orders__list">
-      <div class="order__number">Order #{{ order.order.orderId }}</div>
+      <div class="order__number">Order Nr.{{ order.order.orderId }}</div>
       <div class="information">
         <div class="services__information">Service</div>
         <div class="client__information">{{ order.order.service }}</div>
@@ -86,6 +86,13 @@
   list-style: none;
   margin: 0 auto;
   width: 550px;
+  .order__number {
+    font-size: 30px;
+    text-shadow: 0px 0px 15px grey;
+    letter-spacing: 0.1em;
+    color: #5255c8;
+    margin-bottom: 40px;
+  }
 }
 .services__information {
   width: 50%;

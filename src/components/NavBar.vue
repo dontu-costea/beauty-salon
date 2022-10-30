@@ -59,7 +59,7 @@ export default {
             <fa class="avatar__icon" icon="fa-solid fa-user" />
           </div>
           <button
-            v-if="this.$store.state.logged === false"
+            v-if="this.$store.state.user.logged === false"
             @click="this.$router.push({ name: 'login' })"
             type="submit"
             class="menu__item menu__item-hover"
@@ -72,7 +72,9 @@ export default {
               @click="this.showLogout = !this.showLogout"
             >
               {{
-                this.$store.state.firstName + " " + this.$store.state.lastName
+                this.$store.state.user.firstName +
+                " " +
+                this.$store.state.user.lastName
               }}
               <fa
                 icon="fa-solid fa-angle-down"

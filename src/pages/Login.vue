@@ -14,20 +14,20 @@ export default {
   methods: {
     formValidation() {
       if (
-        this.$store.state.defaultEmail === this.email &&
-        this.$store.state.defaultPassword === this.password
+        this.$store.state.user.defaultEmail === this.email &&
+        this.$store.state.user.defaultPassword === this.password
       ) {
         this.loggedStatus();
         this.$router.push({ name: "home" });
         this.emailBorderColor = "#1a1c22";
         this.passwordBorderColor = "#1a1c22";
       } else {
-        if (this.$store.state.defaultEmail !== this.email) {
+        if (this.$store.state.user.defaultEmail !== this.email) {
           this.emailBorderColor = "red";
         } else {
           this.emailBorderColor = "#1a1c22";
         }
-        if (this.$store.state.defaultPassword !== this.password) {
+        if (this.$store.state.user.defaultPassword !== this.password) {
           this.passwordBorderColor = "red";
         } else {
           this.passwordBorderColor = "#1a1c22";

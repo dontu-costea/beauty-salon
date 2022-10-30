@@ -55,6 +55,7 @@ export default {
         this.newOrder.timeFrom &&
         this.newOrder.timeFrom
       ) {
+        this.addOrderId();
         this.sendOrder();
         this.$router.push({ name: "order-2" });
       } else {
@@ -64,8 +65,6 @@ export default {
     sendOrder() {
       this.$store.commit("sendOrder", this.newOrder);
     },
-  },
-  computed: {
     addOrderId() {
       return (this.newOrder.orderId =
         this.$store.state.orders.orders.length + 1);

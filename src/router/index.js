@@ -46,7 +46,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(!Store.state.logged && (to.name === 'home' || to.name === 'order' || to.name === 'order-2' || to.name === 'order-3')) {
+  if(!Store.state.user.logged && (to.name === 'home' || to.name === 'order' || to.name === 'order-2' || to.name === 'order-3')) {
     alert("You need to Log In to acces this page!");
   }
   else next();

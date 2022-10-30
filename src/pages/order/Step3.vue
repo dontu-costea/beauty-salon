@@ -14,7 +14,7 @@ export default {
       this.addNewOrder();
     },
     addNewOrder() {
-      this.$store.commit("addNewOrder", this.$store.state.newOrder.newOrder);
+      this.$store.commit("addNewOrder", this.$store.state.orders.newOrder);
     },
   },
 };
@@ -32,30 +32,30 @@ export default {
         <div class="information">
           <div class="services__information">Service</div>
           <div class="client__information">
-            {{ this.$store.state.newOrder.newOrder.order.service }}
+            {{ this.$store.state.orders.newOrder.order.service }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Product</div>
           <div class="client__information">
-            {{ this.$store.state.newOrder.newOrder.order.product }}
+            {{ this.$store.state.orders.newOrder.order.product }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Master</div>
           <div class="client__information">
-            {{ this.$store.state.newOrder.newOrder.order.master }}
+            {{ this.$store.state.orders.newOrder.order.master }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Date/Time</div>
           <div class="client__information">
             {{
-              this.$store.state.newOrder.newOrder.order.date +
+              this.$store.state.orders.newOrder.order.date +
               " " +
-              this.$store.state.newOrder.newOrder.order.timeFrom +
+              this.$store.state.orders.newOrder.order.timeFrom +
               " - " +
-              this.$store.state.newOrder.newOrder.order.timeTo
+              this.$store.state.orders.newOrder.order.timeTo
             }}
           </div>
         </div>
@@ -63,34 +63,34 @@ export default {
           <div class="services__information">Price</div>
           <div class="client__information">
             {{
-              this.$store.state.newOrder.newOrder.order.price +
+              this.$store.state.orders.newOrder.order.price +
               " " +
-              this.$store.state.newOrder.newOrder.order.money
+              this.$store.state.orders.newOrder.order.money
             }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Client name</div>
           <div class="client__information">
-            {{ this.$store.state.newOrder.newOrder.client.name }}
+            {{ this.$store.state.orders.newOrder.client.name }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Client phone</div>
           <div class="client__information">
-            {{ this.$store.state.newOrder.newOrder.client.phone }}
+            {{ this.$store.state.orders.newOrder.client.phone }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Client email</div>
           <div class="client__information">
-            {{ this.$store.state.newOrder.newOrder.client.email }}
+            {{ this.$store.state.orders.newOrder.client.email }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Comments</div>
           <div class="client__information">
-            {{ this.$store.state.newOrder.newOrder.client.comments }}
+            {{ this.$store.state.orders.newOrder.client.comments }}
           </div>
         </div>
 
@@ -114,7 +114,7 @@ export default {
       <div class="popup">
         <div class="popup__title">
           Order #
-          {{ this.$store.state.newOrder.newOrder.order.orderId }} successfully
+          {{ this.$store.state.orders.newOrder.order.orderId }} successfully
           created
         </div>
         <div class="popup__text">Would you like to do next?</div>

@@ -3,9 +3,14 @@ export default {
     newOrder: {
       order: {},
       client: {}
-    }
+    },
+    orders: []
   }),
   mutations: {
+    addNewOrder(state, payload) {
+      let order = Object.assign({}, payload);
+      state.orders.push(order)
+    },
     sendOrder(state, payload) {
       state.newOrder.order = payload
     },
