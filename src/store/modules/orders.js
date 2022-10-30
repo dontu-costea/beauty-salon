@@ -16,6 +16,6 @@ export default {
     },
     sendClientInformation(state, payload) {
       state.newOrder.client = payload
-    }
+    },
   },
 }

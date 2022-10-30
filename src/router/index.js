@@ -31,6 +31,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0)
   if(!Store.state.user.logged && (to.name === 'home' || to.name === 'order' || to.name === 'order-2' || to.name === 'order-3')) {
     alert("You need to Log In to acces this page!");
   }

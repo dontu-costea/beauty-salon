@@ -213,7 +213,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   background-color: #ebe8ec;
-  padding: 176px 89px 0px 89px;
+  padding: 176px 89px 30px 89px;
   .order-page__title {
     display: flex;
     align-items: center;

@@ -1,10 +1,21 @@
-<script></script>
+<script>
+export default {
+  methods: {
+    showOrder() {
+      this.$store.commit("openOrder");
+    },
+  },
+};
+</script>
 <template>
   <div class="line"></div>
   <div class="orders__title">Orders</div>
   <ul>
     <li v-for="order in this.$store.state.orders.orders" class="orders__list">
-      <div class="order__number">Order Nr.{{ order.order.orderId }}</div>
+      <div class="order__number">
+        <div>Order</div>
+        <div>Nr.{{ order.order.orderId }}</div>
+      </div>
       <div class="information">
         <div class="services__information">Service</div>
         <div class="client__information">{{ order.order.service }}</div>
@@ -88,10 +99,16 @@
   width: 550px;
   .order__number {
     font-size: 30px;
-    text-shadow: 0px 0px 15px grey;
     letter-spacing: 0.1em;
     color: #5255c8;
     margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 8px 22px;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
 }
 .services__information {
