@@ -35,6 +35,7 @@ export default {
       <div class="information">
         <div class="services__information">Date/Time</div>
         <div class="client__information">
+<!--          TODO use template string `${}`-->
           {{
             order.order.date +
             " " +
@@ -47,6 +48,8 @@ export default {
       <div class="information">
         <div class="services__information">Price</div>
         <div class="client__information">
+          <!--          TODO use template string `${}`-->
+
           {{ order.order.price + " " + order.order.money }}
         </div>
       </div>

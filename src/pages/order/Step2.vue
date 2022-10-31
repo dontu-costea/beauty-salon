@@ -5,7 +5,9 @@ export default {
   components: {
     NavBar,
   },
+
   data: () => ({
+    //TODO rename to model
     newClient: {
       name: "",
       phone: "+373",
@@ -13,6 +15,7 @@ export default {
       comments: "",
     },
   }),
+
   methods: {
     formValidation() {
       if (this.newClient.name && this.newClient.phone && this.newClient.email) {
@@ -23,6 +26,7 @@ export default {
       }
     },
     sendClientInformation() {
+      //TODO don't use commit directly, use  this.$store.dispatch("sendClientInformation", this.newClient);
       this.$store.commit("sendClientInformation", this.newClient);
     },
   },
@@ -104,6 +108,7 @@ export default {
         </div>
 
         <div class="button">
+<!--          TODO use router-link or method-->
           <button
             type="submit"
             @click="this.$router.push({ name: 'order' })"

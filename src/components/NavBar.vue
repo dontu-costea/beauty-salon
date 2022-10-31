@@ -3,6 +3,7 @@ export default {
   data: () => ({
     showLogout: false,
   }),
+
   methods: {
     logout() {
       this.$router.push({ name: "index" });

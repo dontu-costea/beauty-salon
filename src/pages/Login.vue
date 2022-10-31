@@ -12,11 +12,11 @@ export default {
     emailBorderColor: "#A3A3A3",
   }),
   methods: {
+    //TODO use library for validations
     formValidation() {
-      if (
-        this.$store.state.user.defaultEmail === this.email &&
-        this.$store.state.user.defaultPassword === this.password
-      ) {
+      const { login, password } = this.store.getters["user"];
+
+      if (login === this.email && password === this.password) {
         this.loggedStatus();
         this.$router.push({ name: "home" });
         this.emailBorderColor = "#1a1c22";

@@ -5,6 +5,7 @@ export default {
   components: {
     NavBar,
   },
+
   data: () => ({
     showServices: true,
     showProducts: false,

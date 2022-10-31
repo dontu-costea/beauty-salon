@@ -2,12 +2,15 @@
 import NavBar from "@/components/NavBar.vue";
 import OrderList from "@/components/OrderList.vue";
 
+//Rename to Step1
 export default {
   components: {
     NavBar,
     OrderList,
   },
+
   data: () => ({
+    //TODO rename to model
     newOrder: {
       service: "",
       product: "",
@@ -21,10 +24,13 @@ export default {
     },
     priceToConvert: 0,
   }),
+
   methods: {
+    //TODO remove event and use v-model
     changeCallStatus(event) {
       // this.chosenService();
       for (let i = 0; i < this.$store.state.services.services; i++) {
+        //TODO use getters
         if (this.$store.state.services.services[i].name == event.target.value) {
           this.priceToConvert = this.$store.state.services.services[i].price;
         }
@@ -43,6 +49,7 @@ export default {
     chosenService() {
       this.$store.commit("chosenService", this.newOrder.service);
     },
+    //TODO remove event and use v-model
     checkMoney(event) {
       if (event.target.value == "EUR") {
         this.newOrder.price = this.priceToConvert / 19.1;
@@ -56,6 +63,7 @@ export default {
       }
     },
     formValidation() {
+      // TODO use validation library
       if (
         this.newOrder.service &&
         this.newOrder.product &&
@@ -75,10 +83,13 @@ export default {
       this.$store.commit("sendOrder", this.newOrder);
     },
     addOrderId() {
+      //todo remove return
       return (this.newOrder.orderId =
         this.$store.state.orders.orders.length + 1);
     },
   },
+
+  //todo computed always after data
   computed: {
     selectedService() {},
   },
@@ -97,6 +108,7 @@ export default {
         <div class="select-service select__block">
           <div class="text__block">
             <span class="text__title">Service</span>
+<!--            TODO use span-->
             hint
           </div>
           <div class="input__block">
@@ -106,8 +118,9 @@ export default {
               @change="changeCallStatus($event)"
             >
               <option disabled>Select from list</option>
+<!--             TODO don't use this in html and use getters['services'] -->
               <option
-                v-for="service in this.$store.state.services.services"
+                v-for="service in $store.state.services.services"
                 :key="service.id"
                 :value="service.name"
                 :price="service.price"
@@ -128,7 +141,7 @@ export default {
               <option disabled>Select from list</option>
               <option
                 v-for="product in this.$store.state.products.products"
-                key:product.id
+                :key="product.id"
               >
                 {{ product.name }}
               </option>
@@ -198,10 +211,11 @@ export default {
               class="select time_date"
             />-->
             <div>{{ priceToConvert }}</div>
+<!--            TODO use v-model-->
             <select
               name="price"
               class="select time_date"
-              @change="checkMoney($event)"
+              @change="checkMoney()"
             >
               <option disabled>Select from list</option>
               <option value="MDL">MDL</option>

@@ -18,4 +18,9 @@ export default {
       state.newOrder.client = payload
     },
   },
+  actions: {
+    sendClientInformation(commit, payload) {
+      commit("sendClientInformation", payload);
+    },
+  }
 }

@@ -78,6 +78,7 @@ export default {
     }
   },*/
   getters: {
+    //todo use arrow function
     getServices (state) {
       return state.services
     } 

@@ -5,9 +5,16 @@ export default {
   components: {
     NavBar,
   },
+
   data: () => ({
     createOrder: false,
+    order: null
   }),
+
+  mounted() {
+    this.order = this.$store.getters["order"];
+  },
+
   methods: {
     addOrder() {
       this.createOrder = !this.createOrder;
@@ -32,6 +39,8 @@ export default {
         <div class="information">
           <div class="services__information">Service</div>
           <div class="client__information">
+<!--            TODO use local variable-->
+<!--            {{ order.service }}-->
             {{ this.$store.state.orders.newOrder.order.service }}
           </div>
         </div>
