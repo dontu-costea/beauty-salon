@@ -23,7 +23,13 @@ export default {
   }),
   methods: {
     changeCallStatus(event) {
-      if (event.target.value === "Hair woman") {
+      // this.chosenService();
+      for (let i = 0; i < this.$store.state.services.services; i++) {
+        if (this.$store.state.services.services[i].name == event.target.value) {
+          this.convertedPrice = this.$store.state.services.services[i].price;
+        }
+      }
+      /* if (event.target.value === "Hair woman") {
         this.convertedPrice = 200;
         this.newOrder.price = this.convertedPrice;
       } else if (event.target.value === "Nails") {
@@ -32,7 +38,10 @@ export default {
       } else if (event.target.value === "Barber") {
         this.convertedPrice = 150;
         this.newOrder.price = this.convertedPrice;
-      }
+      }*/
+    },
+    chosenService() {
+      this.$store.commit("chosenService", this.newOrder.service);
     },
     checkMoney(event) {
       if (event.target.value == "EUR") {
@@ -70,6 +79,9 @@ export default {
         this.$store.state.orders.orders.length + 1);
     },
   },
+  computed: {
+    selectedService() {},
+  },
 };
 </script>
 
@@ -98,6 +110,7 @@ export default {
                 v-for="service in this.$store.state.services.services"
                 :key="service.id"
                 :value="service.name"
+                :price="service.price"
               >
                 {{ service.name }}
               </option>
@@ -178,12 +191,13 @@ export default {
             hint
           </div>
           <div class="input__block">
-            <input
+            <!--<input
               type="number"
               v-model="this.newOrder.price"
               readonly
               class="select time_date"
-            />
+            />-->
+            <div>{{ convertedPrice }}</div>
             <select
               name="price"
               class="select time_date"
