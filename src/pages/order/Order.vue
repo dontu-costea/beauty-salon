@@ -100,16 +100,17 @@ export default {
             hint
           </div>
           <div class="input__block">
+            {{ newOrder.service }}
             <select
               class="select"
-              v-model="this.newOrder.service"
+              v-model="newOrder.service"
               @change="changeCallStatus($event)"
             >
               <option disabled>Select from list</option>
               <option
                 v-for="service in this.$store.state.services.services"
                 :key="service.id"
-                :value="service.name"
+                :value="service"
                 :price="service.price"
               >
                 {{ service.name }}
@@ -197,7 +198,7 @@ export default {
               readonly
               class="select time_date"
             />-->
-            <div>{{ priceToConvert }}</div>
+            <div>{{ newOrder.service.price }}</div>
             <select
               name="price"
               class="select time_date"
