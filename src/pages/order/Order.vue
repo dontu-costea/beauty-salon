@@ -19,25 +19,25 @@ export default {
       money: "MDL",
       orderId: 0,
     },
-    convertedPrice: 0,
+    priceToConvert: 0,
   }),
   methods: {
     changeCallStatus(event) {
       // this.chosenService();
       for (let i = 0; i < this.$store.state.services.services; i++) {
         if (this.$store.state.services.services[i].name == event.target.value) {
-          this.convertedPrice = this.$store.state.services.services[i].price;
+          this.priceToConvert = this.$store.state.services.services[i].price;
         }
       }
       /* if (event.target.value === "Hair woman") {
-        this.convertedPrice = 200;
-        this.newOrder.price = this.convertedPrice;
+        this.priceToConvert = 200;
+        this.newOrder.price = this.priceToConvert;
       } else if (event.target.value === "Nails") {
-        this.convertedPrice = 300;
-        this.newOrder.price = this.convertedPrice;
+        this.priceToConvert = 300;
+        this.newOrder.price = this.priceToConvert;
       } else if (event.target.value === "Barber") {
-        this.convertedPrice = 150;
-        this.newOrder.price = this.convertedPrice;
+        this.priceToConvert = 150;
+        this.newOrder.price = this.priceToConvert;
       }*/
     },
     chosenService() {
@@ -45,13 +45,13 @@ export default {
     },
     checkMoney(event) {
       if (event.target.value == "EUR") {
-        this.newOrder.price = this.convertedPrice / 19.1;
+        this.newOrder.price = this.priceToConvert / 19.1;
         this.newOrder.money = "EUR";
       } else if (event.target.value == "USD") {
-        this.newOrder.price = this.convertedPrice / 19.23;
+        this.newOrder.price = this.priceToConvert / 19.23;
         this.newOrder.money = "USD";
       } else {
-        this.newOrder.price = this.convertedPrice;
+        this.newOrder.price = this.priceToConvert;
         this.newOrder.money = "MDL";
       }
     },
@@ -197,7 +197,7 @@ export default {
               readonly
               class="select time_date"
             />-->
-            <div>{{ convertedPrice }}</div>
+            <div>{{ priceToConvert }}</div>
             <select
               name="price"
               class="select time_date"
