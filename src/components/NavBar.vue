@@ -12,8 +12,8 @@ export default {
 
   methods: {
     logout() {
-      this.$router.push({ name: "index" });
       localStorage.setItem("isAuth", false);
+      this.$router.push({ name: "index" });
     },
   },
 };
