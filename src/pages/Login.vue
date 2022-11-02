@@ -20,16 +20,26 @@ export default {
 
   validations: () => ({
     form: {
-      email: { required, email },
-      password: { required },
+      email: {
+        required,
+        email,
+        checkEmail(value) {
+          return value === this.$store.getters["user"].login;
+        },
+      },
+      password: {
+        required,
+        checkEmail(value) {
+          return value === this.$store.getters["user"].password;
+        },
+      },
     },
   }),
 
   methods: {
     formValidation() {
-      const { login, password } = this.$store.getters["user"];
       this.v$.$touch();
-      if (login === this.form.email && password === this.form.password) {
+      if (!this.v$.form.$error) {
         localStorage.setItem("isAuth", "true");
         this.$router.push({ name: "home" });
       }
