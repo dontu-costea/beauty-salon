@@ -1,41 +1,38 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email } from "@vuelidate/validators";
 
 export default {
   components: {
     NavBar,
   },
+
+  setup: () => ({ v$: useVuelidate() }),
+
   data: () => ({
-    email: "",
-    password: "",
-    passwordBorderColor: "#A3A3A3",
-    emailBorderColor: "#A3A3A3",
+    state: null,
+    form: {
+      email: "",
+      password: "",
+    },
   }),
+
+  validations: () => ({
+    form: {
+      email: { required, email },
+      password: { required },
+    },
+  }),
+
   methods: {
     formValidation() {
-      if (
-        this.$store.state.user.defaultEmail === this.email &&
-        this.$store.state.user.defaultPassword === this.password
-      ) {
-        this.loggedStatus();
+      const { login, password } = this.$store.getters["user"];
+      this.v$.$touch();
+      if (login === this.form.email && password === this.form.password) {
+        localStorage.setItem("isAuth", "true");
         this.$router.push({ name: "home" });
-        this.emailBorderColor = "#1a1c22";
-        this.passwordBorderColor = "#1a1c22";
-      } else {
-        if (this.$store.state.user.defaultEmail !== this.email) {
-          this.emailBorderColor = "red";
-        } else {
-          this.emailBorderColor = "#1a1c22";
-        }
-        if (this.$store.state.user.defaultPassword !== this.password) {
-          this.passwordBorderColor = "red";
-        } else {
-          this.passwordBorderColor = "#1a1c22";
-        }
       }
-    },
-    loggedStatus() {
-      this.$store.commit("loggedStatus");
     },
   },
 };
@@ -49,25 +46,25 @@ export default {
       <div class="email__block">
         <fa icon="fa-solid fa-at" class="form__icon" />
         <input
-          v-model="email"
+          v-model="form.email"
           type="text"
           name="email"
           placeholder="Your Email"
+          :class="{ errorBorder: v$.form.email.$error }"
           class="login__input"
           id="login__email"
-          :style="{ border: '1px' + ' solid ' + this.emailBorderColor }"
         />
       </div>
       <div class="password__block">
         <fa icon="fa-solid fa-lock" class="form__icon" />
         <input
-          v-model="password"
+          v-model="form.password"
           type="password"
           name="password"
           placeholder="Your Password"
+          :class="{ errorBorder: v$.form.password.$error }"
           class="login__input"
           id="login__password"
-          :style="{ border: '1px' + ' solid ' + this.passwordBorderColor }"
         />
       </div>
       <button class="submit" id="login__submit" @click="formValidation">
@@ -121,6 +118,10 @@ export default {
         outline: none;
         box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
         width: 100%;
+        border: 1px solid transparent;
+      }
+      .errorBorder {
+        border: 1px solid red;
       }
     }
   }
@@ -160,5 +161,9 @@ export default {
   margin: 30px 0px;
   transform: translateZ(30px);
   backface-visibility: hidden;
+}
+.error {
+  margin-left: 3px;
+  color: red;
 }
 </style>

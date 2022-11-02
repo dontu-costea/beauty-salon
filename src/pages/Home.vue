@@ -5,11 +5,20 @@ export default {
   components: {
     NavBar,
   },
+
   data: () => ({
     showServices: true,
     showProducts: false,
     showMasters: false,
+    services: [],
+    products: [],
+    masters: [],
   }),
+  mounted() {
+    this.services = this.$store.getters["services"];
+    this.products = this.$store.getters["products"];
+    this.masters = this.$store.getters["masters"];
+  },
 };
 </script>
 
@@ -29,7 +38,7 @@ export default {
         <div v-if="showServices" class="content__block">
           <div
             class="content__item"
-            v-for="item in this.$store.state.services.services"
+            v-for="item in this.services"
             @click="this.$router.push({ name: 'order' })"
           >
             <img :src="item.img" alt="" />
@@ -52,7 +61,7 @@ export default {
         <div v-if="showProducts" class="content__block">
           <div
             class="content__item"
-            v-for="item in this.$store.state.products.products"
+            v-for="item in this.products"
             @click="this.$router.push({ name: 'order' })"
           >
             <img :src="item.img" alt="" />
@@ -75,7 +84,7 @@ export default {
         <div v-if="showMasters" class="content__block">
           <div
             class="content__item"
-            v-for="item in this.$store.state.masters.masters"
+            v-for="item in this.masters"
             @click="this.$router.push({ name: 'order' })"
           >
             <img :src="item.img" alt="" />

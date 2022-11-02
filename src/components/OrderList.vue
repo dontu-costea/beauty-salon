@@ -1,5 +1,11 @@
 <script>
 export default {
+  data: () => ({
+    orders: [],
+  }),
+  mounted() {
+    this.orders = this.$store.getters["orders"];
+  },
   methods: {
     showOrder() {
       this.$store.commit("openOrder");
@@ -11,14 +17,16 @@ export default {
   <div class="line"></div>
   <div class="orders__title">Orders</div>
   <ul>
-    <li v-for="order in this.$store.state.orders.orders" class="orders__list">
+    <li v-for="order in this.orders" class="orders__list">
       <div class="order__number">
         <div>Order</div>
         <div>Nr.{{ order.order.orderId }}</div>
       </div>
       <div class="information">
         <div class="services__information">Service</div>
-        <div class="client__information">{{ order.order.service }}</div>
+        <div class="client__information">
+          {{ order.order.service }}
+        </div>
       </div>
       <div class="information">
         <div class="services__information">Product</div>
@@ -36,18 +44,14 @@ export default {
         <div class="services__information">Date/Time</div>
         <div class="client__information">
           {{
-            order.order.date +
-            " " +
-            order.order.timeFrom +
-            " - " +
-            order.order.timeTo
+            `${order.order.date} ${order.order.timeFrom} - ${order.order.timeTo}`
           }}
         </div>
       </div>
       <div class="information">
         <div class="services__information">Price</div>
         <div class="client__information">
-          {{ order.order.price + " " + order.order.money }}
+          {{ `${order.order.price} ${order.order.money}` }}
         </div>
       </div>
       <div class="information">

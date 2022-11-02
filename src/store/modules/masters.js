@@ -57,5 +57,9 @@ export default {
         img: require('@/assets/img/services-img/barber.png'),
       }
     ],
-  })
+  }),
+  
+  getters: {
+    masters: (state) => state.masters
+  }
 }

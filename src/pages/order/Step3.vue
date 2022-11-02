@@ -5,16 +5,25 @@ export default {
   components: {
     NavBar,
   },
+
   data: () => ({
     createOrder: false,
+    order: [],
+    client: [],
   }),
+
+  mounted() {
+    this.order = this.$store.getters["order"];
+    this.client = this.$store.getters["client"];
+  },
+
   methods: {
     addOrder() {
       this.createOrder = !this.createOrder;
       this.addNewOrder();
     },
     addNewOrder() {
-      this.$store.commit("addNewOrder", this.$store.state.orders.newOrder);
+      this.$store.dispatch("addNewOrder");
     },
   },
 };
@@ -32,65 +41,55 @@ export default {
         <div class="information">
           <div class="services__information">Service</div>
           <div class="client__information">
-            {{ this.$store.state.orders.newOrder.order.service }}
+            {{ order.service }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Product</div>
           <div class="client__information">
-            {{ this.$store.state.orders.newOrder.order.product }}
+            {{ order.product }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Master</div>
           <div class="client__information">
-            {{ this.$store.state.orders.newOrder.order.master }}
+            {{ order.master }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Date/Time</div>
           <div class="client__information">
-            {{
-              this.$store.state.orders.newOrder.order.date +
-              " " +
-              this.$store.state.orders.newOrder.order.timeFrom +
-              " - " +
-              this.$store.state.orders.newOrder.order.timeTo
-            }}
+            {{ `${order.date} ${order.timeFrom} - ${order.timeTo}` }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Price</div>
           <div class="client__information">
-            {{
-              this.$store.state.orders.newOrder.order.price +
-              " " +
-              this.$store.state.orders.newOrder.order.money
-            }}
+            {{ `${order.price} ${order.money}` }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Client name</div>
           <div class="client__information">
-            {{ this.$store.state.orders.newOrder.client.name }}
+            {{ client.name }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Client phone</div>
           <div class="client__information">
-            {{ this.$store.state.orders.newOrder.client.phone }}
+            {{ client.phone }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Client email</div>
           <div class="client__information">
-            {{ this.$store.state.orders.newOrder.client.email }}
+            {{ client.email }}
           </div>
         </div>
         <div class="information">
           <div class="services__information">Comments</div>
           <div class="client__information">
-            {{ this.$store.state.orders.newOrder.client.comments }}
+            {{ client.comments }}
           </div>
         </div>
 

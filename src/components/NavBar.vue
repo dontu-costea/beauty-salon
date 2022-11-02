@@ -3,10 +3,17 @@ export default {
   data: () => ({
     showLogout: false,
   }),
+
+  computed: {
+    checkAuth() {
+      return JSON.parse(localStorage.getItem("isAuth"));
+    },
+  },
+
   methods: {
     logout() {
       this.$router.push({ name: "index" });
-      this.$store.commit("loggedStatus");
+      localStorage.setItem("isAuth", false);
     },
   },
 };
@@ -59,7 +66,7 @@ export default {
             <fa class="avatar__icon" icon="fa-solid fa-user" />
           </div>
           <button
-            v-if="this.$store.state.user.logged === false"
+            v-if="!checkAuth"
             @click="this.$router.push({ name: 'login' })"
             type="submit"
             class="menu__item menu__item-hover"

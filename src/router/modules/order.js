@@ -1,4 +1,4 @@
-import Order from '@/pages/order/Order.vue'
+import Step1 from '@/pages/order/Step1.vue'
 import Step2 from '@/pages/order/Step2.vue'
 import Step3 from '@/pages/order/Step3.vue'
 
@@ -6,7 +6,7 @@ export default [
   {
     path: '/order/',
     name: 'order',
-    component: Order
+    component: Step1
   },
   {
     path: '/order-2',

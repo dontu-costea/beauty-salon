@@ -1,7 +1,5 @@
 export default {
   state: () => ({
-    /*chosenService: "",
-    price: 0,*/
     services: [
       {
         id: 1,
@@ -72,15 +70,8 @@ export default {
       }
     ]
   }),
-  /*mutations: {
-    chosenService(state, payload) {
-      state.chosenService = payload;
-    }
-  },*/
+  
   getters: {
-    getServices (state) {
-      return state.services
-    } 
-      
+    services: (state) => state.services
   }
 }

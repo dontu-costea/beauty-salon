@@ -1,29 +1,42 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email, minLength, maxLength } from "@vuelidate/validators";
 
 export default {
   components: {
     NavBar,
   },
+
+  setup: () => ({ v$: useVuelidate() }),
+
   data: () => ({
-    newClient: {
+    model: {
       name: "",
       phone: "+373",
       email: "",
       comments: "",
     },
   }),
+
+  validations: () => ({
+    model: {
+      name: { required },
+      phone: { required, min: minLength(12), max: maxLength(12) },
+      email: { required, email },
+    },
+  }),
+
   methods: {
     formValidation() {
-      if (this.newClient.name && this.newClient.phone && this.newClient.email) {
+      this.v$.$touch();
+      if (!this.v$.model.$error) {
         this.sendClientInformation();
         this.$router.push({ name: "order-3" });
-      } else {
-        alert("Enter the data correctly");
       }
     },
     sendClientInformation() {
-      this.$store.commit("sendClientInformation", this.newClient);
+      this.$store.dispatch("sendClientInformation", this.model);
     },
   },
 };
@@ -45,11 +58,12 @@ export default {
           </div>
           <div class="input__block">
             <input
-              v-model="this.newClient.name"
+              v-model="this.model.name"
               type="text"
               name="name"
               class="select"
               placeholder="Your name"
+              :class="{ errorBorder: v$.model.name.$error }"
             />
           </div>
         </div>
@@ -61,11 +75,12 @@ export default {
           </div>
           <div class="input__block">
             <input
-              v-model="this.newClient.phone"
+              v-model="this.model.phone"
               type="tel"
               name="phone"
               class="select"
               placeholder="Your phone"
+              :class="{ errorBorder: v$.model.phone.$error }"
             />
           </div>
         </div>
@@ -77,11 +92,12 @@ export default {
           </div>
           <div class="input__block">
             <input
-              v-model="this.newClient.email"
+              v-model="this.model.email"
               type="email"
               name="email"
               class="select"
               placeholder="Your E-mail"
+              :class="{ errorBorder: v$.model.email.$error }"
             />
           </div>
         </div>
@@ -93,7 +109,7 @@ export default {
           </div>
           <div class="input__block">
             <textarea
-              v-model="this.newClient.comments"
+              v-model="this.model.comments"
               name="comments"
               class="select"
               placeholder="Add some comments here. This field is optional"
@@ -104,13 +120,9 @@ export default {
         </div>
 
         <div class="button">
-          <button
-            type="submit"
-            @click="this.$router.push({ name: 'order' })"
-            class="form__button back"
-          >
+          <router-link to="/order" class="form__button back">
             Back
-          </button>
+          </router-link>
           <button
             type="submit"
             @click="formValidation"
@@ -193,6 +205,9 @@ export default {
         width: 578px;
         padding: 12px 15px;
       }
+      .errorBorder {
+        border: 1px solid red;
+      }
     }
   }
   .button {
@@ -216,6 +231,10 @@ export default {
     .back {
       width: 240px;
       margin-left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
     }
     .next {
       width: 360px;
